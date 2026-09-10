@@ -1,0 +1,796 @@
+# Maven Java Application Development
+
+You are given the following GitHub repository link:
+
+`https://github.com/Kumbhambhargavi75/XXXXX/`
+
+---
+
+# 1. Maven Java Application Development
+
+## Step 1: Open Eclipse
+
+Launch **Eclipse IDE**, preferably **Eclipse IDE for Enterprise Java Developers**.
+
+---
+
+## Step 2: Clone and Import the GitHub Repository
+
+Go to:
+
+**File → Import → Git → Projects from Git (with smart import) → Next**
+
+Select:
+
+**Clone URI → Next**
+
+Enter the GitHub repository URL.
+
+Example:
+
+```text
+https://github.com/username/repository.git
+```
+
+Select the required branch, usually:
+
+```text
+main
+```
+
+or
+
+```text
+master
+```
+
+Choose the directory where Eclipse should store the repository.
+
+Click **Finish**.
+
+The project should now appear in **Eclipse → Project Explorer**.
+
+---
+
+## Step 3: Check `pom.xml`
+
+Open the project's:
+
+```text
+pom.xml
+```
+
+Check whether the Maven configuration is correct.
+
+Important things to check:
+
+* `groupId`
+* `artifactId`
+* `version`
+* `packaging`
+* Dependencies
+* Plugins
+* Java version
+* JUnit dependencies
+* `finalName`, if specified
+
+For a web application that must generate a WAR file:
+
+```xml
+<packaging>war</packaging>
+```
+
+If no packaging is specified, Maven normally uses:
+
+```text
+jar
+```
+
+### Resolve Dependencies
+
+Maven uses `pom.xml` to download and manage project dependencies.
+
+In Eclipse:
+
+**Right-click project → Maven → Update Project → Apply and Close**
+
+---
+
+## Step 4: Build the Maven Project
+
+Run the Maven commands as required.
+
+### Test
+
+```bash
+mvn test
+```
+
+Runs the project's tests.
+
+### Package
+
+```bash
+mvn package
+```
+
+Compiles the project, runs tests, and packages the application.
+
+For a web application, this should generate a:
+
+```text
+.war
+```
+
+file.
+
+### Install
+
+```bash
+mvn install
+```
+
+Builds the project and installs the generated artifact into the local Maven repository:
+
+```text
+~/.m2/repository
+```
+
+---
+
+## Step 5: Verify the Generated Artifact
+
+After a successful build, open:
+
+```text
+project/
+└── target/
+```
+
+For a WAR project, you should see something similar to:
+
+```text
+target/
+├── classes/
+├── test-classes/
+└── LMSWEBP.war
+```
+
+The exact WAR filename depends on the project's `artifactId`, `version`, and/or `finalName`.
+
+If you do not see the WAR:
+
+1. Check that `pom.xml` contains:
+
+   ```xml
+   <packaging>war</packaging>
+   ```
+2. Run:
+
+   ```bash
+   mvn clean package
+   ```
+3. Refresh the project/folder.
+4. Check the `target/` directory.
+
+---
+
+## Step 6: Solve Maven SBQs
+
+Prepare for short questions related to:
+
+* `.m2/repository`
+* Maven dependencies
+* JUnit
+* `pom.xml`
+* `groupId`
+* `artifactId`
+* `version`
+* `packaging`
+* `build`
+* `package`
+* `install`
+* `finalName`
+* `target/` folder
+* WAR vs JAR
+* Maven lifecycle
+
+---
+
+# 2. Git and GitHub
+
+## Step 1: Open Git Bash / Terminal in the Project
+
+In Eclipse:
+
+**Right-click Maven project → Show In → Local Terminal**
+
+You can use:
+
+* Git Bash
+* Terminal
+* Windows PowerShell
+
+Make sure the terminal is opened in the **Maven project's root directory**, where `pom.xml` is located.
+
+---
+
+## Step 2: Initialize Git
+
+```bash
+git init
+```
+
+Initializes a Git repository in the project.
+
+---
+
+## Step 3: Configure Git Username and Email
+
+Set your GitHub username:
+
+```bash
+git config --global user.name "Your User Name"
+```
+
+Set your email:
+
+```bash
+git config --global user.email "your@email.com"
+```
+
+You can verify them using:
+
+```bash
+git config --global user.name
+git config --global user.email
+```
+
+---
+
+## Step 4: Add Project Files
+
+```bash
+git add .
+```
+
+Adds all project files to the staging area.
+
+---
+
+## Step 5: Commit the Project
+
+```bash
+git commit -m "first commit"
+```
+
+Creates the first commit.
+
+---
+
+## Step 6: Solve Git SBQs
+
+Prepare for short questions/tasks related to:
+
+* `git init`
+* `git clone`
+* `git add`
+* `git commit`
+* Branch
+* Merge
+* Merge conflict
+* Revert
+* Stash
+* Restore
+* `.gitignore`
+* Push
+* Pull
+* Remote repositories
+
+---
+
+## Step 7: Create a GitHub Repository
+
+Go to GitHub and create a **new repository** for your Maven project.
+
+For example:
+
+```text
+LMSWEBP
+```
+
+---
+
+## Step 8: Connect the Local Repository to GitHub
+
+Rename the current branch to `main`:
+
+```bash
+git branch -M main
+```
+
+Add the GitHub remote:
+
+```bash
+git remote add origin1 https://github.com/YOURGITHUBUSERNAME/LMSWEBP.git
+```
+
+Check the remote:
+
+```bash
+git remote -v
+```
+
+---
+
+## Step 9: Push the Project to GitHub
+
+```bash
+git push -u origin1 main
+```
+
+Refresh your GitHub repository and verify that the project files are present.
+
+### If Access Is Denied
+
+If you are trying to push to someone else's repository, you may receive an access-denied error.
+
+Use **your own GitHub repository** and your own remote URL.
+
+You can also change an existing remote URL:
+
+```bash
+git remote set-url origin https://github.com/YOURGITHUBUSERNAME/LMSWEBP.git
+```
+
+Then push:
+
+```bash
+git push -u origin main
+```
+
+If old GitHub credentials are stored on your system, remove/update the old credentials and authenticate with the correct GitHub account.
+
+---
+
+# 3. Docker
+
+## Objective
+
+Containerize the Maven Java web application using Docker.
+
+Before starting:
+
+* Start **Docker Desktop**
+* Make sure Docker is installed
+* Log in to Docker Hub
+
+---
+
+# 4. Basic Docker Commands
+
+Open a terminal in the Maven project directory.
+
+Check Docker version:
+
+```bash
+docker --version
+```
+
+Check running/stopped containers:
+
+```bash
+docker ps -a
+```
+
+Check local images:
+
+```bash
+docker image ls
+```
+
+Log in to Docker Hub:
+
+```bash
+docker login
+```
+
+---
+
+# 5. Create the Dockerfile
+
+The Dockerfile should be created in the **root directory of the Maven project**, at the same level as `pom.xml` and `target/`.
+
+Project structure:
+
+```text
+LMSWEBP/
+├── pom.xml
+├── Dockerfile
+├── src/
+└── target/
+    └── LMSWEBP.war
+```
+
+You can open VS Code from the terminal:
+
+```bash
+code .
+```
+
+Create a file named exactly:
+
+```text
+Dockerfile
+```
+
+---
+
+# 6. Dockerfile for a Maven WAR Application
+
+Use Tomcat as the base image:
+
+```dockerfile
+FROM tomcat:9.0
+
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
+```
+
+## Explanation
+
+### `FROM`
+
+```dockerfile
+FROM tomcat:9.0
+```
+
+Uses the official Tomcat 9 image as the base image.
+
+### `COPY`
+
+```dockerfile
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+```
+
+Copies the WAR file generated by Maven into Tomcat's `webapps` directory.
+
+Naming it:
+
+```text
+ROOT.war
+```
+
+causes Tomcat to deploy it as the root application.
+
+Therefore:
+
+```text
+http://localhost:7089/
+```
+
+can be used instead of:
+
+```text
+http://localhost:7089/LMSWEBP/
+```
+
+### `EXPOSE`
+
+```dockerfile
+EXPOSE 8080
+```
+
+Tomcat listens on port **8080 inside the container** by default.
+
+Important:
+
+`EXPOSE` does **not** change Tomcat's actual port.
+
+### `CMD`
+
+```dockerfile
+CMD ["catalina.sh", "run"]
+```
+
+Starts Tomcat in the foreground, which keeps the Docker container running.
+
+---
+
+# 7. Build the Docker Image
+
+Make sure you are in the project directory containing the Dockerfile.
+
+Build the image:
+
+```bash
+docker build -t lmsimage .
+```
+
+Explanation:
+
+* `docker build` → builds a Docker image
+* `-t lmsimage` → gives the image a name/tag
+* `.` → uses the current directory as the build context
+
+Check the image:
+
+```bash
+docker image ls
+```
+
+You should see:
+
+```text
+lmsimage
+```
+
+---
+
+# 8. Run the Docker Container
+
+Run the image:
+
+```bash
+docker run -d -p 7089:8080 --name lmcontainer lmsimage
+```
+
+Explanation:
+
+* `-d` → detached/background mode
+* `-p 7089:8080` → maps host port `7089` to container port `8080`
+* `--name lmcontainer` → gives the container a name
+* `lmsimage` → image used to create the container
+
+Check the container:
+
+```bash
+docker ps
+```
+
+Then open:
+
+```text
+http://localhost:7089/
+```
+
+This should open the LMSWEBP application.
+
+---
+
+# 9. Push the Docker Image to Docker Hub
+
+Docker Hub images normally use the format:
+
+```text
+<dockerhub-username>/<repository-name>:<tag>
+```
+
+Example:
+
+```bash
+docker tag lmsimage kumbhambhargavi/lmsimage:latest
+```
+
+Then push:
+
+```bash
+docker push kumbhambhargavi/lmsimage:latest
+```
+
+The image will be uploaded to your Docker Hub repository.
+
+You can verify it on:
+
+**Docker Hub → Repositories**
+
+---
+
+# 10. Pull and Run an Image
+
+## Pull an Image
+
+Example:
+
+```bash
+docker pull ubuntu
+```
+
+This downloads the Ubuntu image from Docker Hub.
+
+---
+
+## Run an Image
+
+```bash
+docker run ubuntu
+```
+
+Creates and runs a container from the Ubuntu image.
+
+---
+
+## Run a Container in Interactive Mode
+
+```bash
+docker run -it ubuntu bash
+```
+
+Explanation:
+
+* `-i` → interactive mode
+* `-t` → allocates a terminal
+* `ubuntu` → image
+* `bash` → starts the Bash shell
+
+You can now execute commands inside the Ubuntu container.
+
+---
+
+# 11. Stop a Container
+
+List containers:
+
+```bash
+docker ps -a
+```
+
+Stop a running container:
+
+```bash
+docker stop <container-id>
+```
+
+Example:
+
+```bash
+docker stop 96724fc65bd8
+```
+
+You can also use the container name:
+
+```bash
+docker stop lmcontainer
+```
+
+---
+
+# 12. Remove a Container
+
+```bash
+docker rm <container-id>
+```
+
+Example:
+
+```bash
+docker rm 96724fc65bd8
+```
+
+Or:
+
+```bash
+docker rm lmcontainer
+```
+
+A container generally needs to be stopped before it can be removed.
+
+---
+
+# 13. Important Docker SBQs
+
+Prepare for short questions related to:
+
+* Docker image
+* Docker container
+* Image vs container
+* Dockerfile
+* `FROM`
+* `COPY`
+* `EXPOSE`
+* `CMD`
+* `docker build`
+* `docker run`
+* `docker pull`
+* `docker push`
+* `docker tag`
+* `docker ps`
+* `docker ps -a`
+* `docker image ls`
+* `docker stop`
+* `docker start`
+* `docker rm`
+* Interactive mode
+* Port mapping
+* Docker Hub
+
+---
+
+# 14. Complete Practical Order
+
+For the actual lab, the overall order should be:
+
+```text
+GitHub Repository
+       ↓
+Clone Repository
+       ↓
+Import into Eclipse
+       ↓
+Check / Fix pom.xml
+       ↓
+Maven → Update Project
+       ↓
+mvn test
+       ↓
+mvn package
+       ↓
+Check target/*.war
+       ↓
+Git initialization / Git tasks
+       ↓
+Create your GitHub repository
+       ↓
+git add .
+       ↓
+git commit
+       ↓
+git remote add
+       ↓
+git push
+       ↓
+Create Dockerfile
+       ↓
+docker login
+       ↓
+docker build
+       ↓
+docker image ls
+       ↓
+docker run
+       ↓
+Open localhost:7089
+       ↓
+docker tag
+       ↓
+docker push
+       ↓
+Verify image on Docker Hub
+```
+
+## Important Exam Point
+
+The **Maven build must come before Docker image building**, because the Dockerfile needs the generated WAR file:
+
+```text
+Maven
+  ↓
+target/LMSWEBP.war
+  ↓
+Dockerfile COPY
+  ↓
+Docker image
+  ↓
+Docker container
+  ↓
+localhost:7089
+```
+
+Also, for:
+
+```bash
+docker run -p 7089:8080
+```
+
+the correct Dockerfile line is:
+
+```dockerfile
+EXPOSE 8080
+```
+
+not `EXPOSE 7089`.
+
+`7089` is the **host port**, while `8080` is the **Tomcat container port**.
